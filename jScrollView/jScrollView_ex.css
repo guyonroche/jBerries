@@ -1,0 +1,113 @@
+
+body {
+    margin: 0px;
+    overflow: hidden;
+}
+
+div#data-table-frame {
+    position: absolute;
+    left: 200px;
+    top: 20px;
+    width: 340px;
+    height: 600px;
+    overflow: hidden;
+    border: 1px solid rgb(224, 224, 224);
+}
+
+/*******************************************************************************
+ jScrollView styles
+ 
+ All styles are prefixed with the default prefix 'jsv'.
+ You can use a different prefix by adding a "prefix" element to the config
+ object when creating the JScrollView. This way you can support two separate
+ scroll views with different styles.
+ 
+ Many of the styles are additive. For example the jsvBar style is the base style
+ used for the bars. The jsvBarOver is added whenever the mouse is over the bar
+ but the jsvBar style is never removed.
+*/
+
+div.jsvBar {
+    position: absolute;
+    left: 355px;
+    top: 20px;
+    width: 7px;
+    height: 600px;
+    background: #ffffff
+}
+div.jsvBarOver {
+    background: #f8f8f8;
+}
+div.jsvBarActive {
+    background: #f0f0f0;
+}
+div.jsvHandle {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 7px;
+    height: 20px;
+    background: #dddddd;
+}
+div.jsvHandleOver {
+    background: #cccccc;
+}
+div.jsvHandleActive {
+    background: #808080;
+}
+
+div.data-content {
+    position: absolute;
+    width:300px;
+    background-color: #f8f8e0;
+    
+}
+div.jsvSquare {
+    background: white;
+}
+
+div.jsvArrowUp {
+    width: 20px;
+    height: 20px;
+    background-image: url('upArrow.20.png');
+}
+div.jsvArrowUpOver {
+    background-position: -20px 0px;
+}
+div.jsvArrowUpActive {
+    background-position: -20px 0px;
+}
+div.jsvArrowDown {
+    width: 20px;
+    height: 20px;
+    background-image: url('downArrow.20.png');
+}
+div.jsvArrowDownOver {
+    background-position: -20px 0px;
+}
+div.jsvArrowDownActive {
+    background-position: -20px 0px;
+}
+div.jsvArrowLeft {
+    width: 20px;
+    height: 20px;
+    background-image: url('leftArrow.20.png');
+}
+div.jsvArrowLeftOver {
+    background-position: -20px 0px;
+}
+div.jsvArrowLeftActive {
+    background-position: -20px 0px;
+}
+div.jsvArrowRight {
+    width: 20px;
+    height: 20px;
+    background-image: url('rightArrow.20.png');
+}
+div.jsvArrowRightOver {
+    background-position: -20px 0px;
+}
+div.jsvArrowRightActive {
+    background-position: -20px 0px;
+}
+

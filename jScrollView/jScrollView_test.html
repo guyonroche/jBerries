@@ -1,0 +1,232 @@
+<html lang="en">
+<head>
+    <title>JScrollView Test</title>
+                
+<!--<script src="jquery.js"></script>-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script> 
+<script src="mousewheel.js"></script>
+
+<script src="jScrollView.js"></script>
+<script type="text/javascript">
+
+function addRow(name, data) {
+    var table = document.getElementById('data-table');
+    var row = table.insertRow(table.rows.length);
+    
+    var cell = row.insertCell(0);
+    cell.width = '150px';
+    cell.innerHTML = name;
+    
+    cell = row.insertCell(1);
+    cell.width = '150px';
+    cell.innerHTML = data;
+    
+}
+
+function resizeFrame() {
+    var $dataTableFrame = $('#data-table-frame');
+    $dataTableFrame.height($(window).height() - 20);
+    $dataTableFrame.width($(window).width() - 210);
+    $dataTableFrame.data('jsv').resize();        
+}
+
+
+function init() {
+    
+    var vScroll = $("#vertical-scroll").val();
+    if (vScroll == "none") vScroll = null;
+
+    var hScroll = $("#horizontal-scroll").val();
+    if (hScroll == "none") hScroll = null;
+    
+    var widthVal = $("#width-value").val();
+    var width = parseInt(widthVal);
+    
+    // watch me mess with the CSS styles!
+    $("#jsvStyles").html("" +
+        "div.jsvArrowUp{ width: " + width + "px; height: " + width + "px; background-image: url('upArrow." + width + ".png'); } " +
+        "div.jsvArrowUpOver{ background-position: -" + width + "px 0px; } " +
+        "div.jsvArrowUpActive{ background-position: -" + (2 * width) + "px 0px; } " +
+        "div.jsvArrowDown{ width: " + width + "px; height: " + width + "px; background-image: url('downArrow." + width + ".png'); } " +
+        "div.jsvArrowDownOver{ background-position: -" + width + "px 0px; } " +
+        "div.jsvArrowDownActive{ background-position: -" + (2 * width) + "px 0px; } " + 
+        "div.jsvArrowLeft{ width: " + width + "px; height: " + width + "px; background-image: url('leftArrow." + width + ".png'); } " +
+        "div.jsvArrowLeftOver{ background-position: -" + width + "px 0px; } " +
+        "div.jsvArrowLeftActive{ background-position: -" + (2 * width) + "px 0px; } " +
+        "div.jsvArrowRight{ width: " + width + "px; height: " + width + "px; background-image: url('rightArrow." + width + ".png'); } " +
+        "div.jsvArrowRightOver{ background-position: -" + width + "px 0px; } " +
+        "div.jsvArrowRightActive{ background-position: -" + (2 * width) + "px 0px; } "
+    );
+    
+    var arrows = $("#arrows-check").is(':checked');
+    var mousewheel = $("#mousewheel-check").is(':checked');
+    
+    $('#data-table-frame').jScrollView({
+        vertical: vScroll,
+        horizontal: hScroll,
+        arrows: arrows,
+        mousewheel: mousewheel,
+        width: width
+    });
+    
+    resizeFrame();
+    
+}
+
+function regen() {
+    
+        
+    var html = '<div id="data-table-frame"><div class="data-content"><table id="data-table" cellpadding="0" cellspacing="0" border="0"></table></div></div>';
+    $('#data-table-outer').html(html);
+    addRow("First Name", "Some Data");
+    for (var i = 0; i < 30; i++) {
+        addRow("Some Name", "Some Data");
+    }
+    addRow("Last Name", "Some Data");
+    init();
+}
+
+
+$(document).ready(function(event){
+    regen();
+
+    $("#addRowButton").click(function(event){
+        addRow("Some Person", "Some Data");
+        $('#data-table-frame').data('jsv').resize();
+        event.preventDefault();
+    });
+
+    $("#regenButton").click(function(event){
+        regen();
+        event.preventDefault();
+    });
+
+    $(window).resize(resizeFrame);
+});
+
+</script>
+</head>
+
+<style type="text/css">
+body {
+    margin: 0px;
+    overflow: hidden;
+}
+
+div#data-table-frame {
+    position: absolute;
+    left: 200px;
+    top: 10px;
+    width: 340px;
+    height: 600px;
+    overflow: hidden;
+    border: 1px solid rgb(224, 224, 224);
+}
+
+table#data-table {
+    
+    
+}
+
+
+
+div.jsvBar {
+    position: absolute;
+    left: 355px;
+    top: 10px;
+    width: 7px;
+    height: 600px;
+    background: #ffffff
+}
+div.jsvBarOver {
+    background: #f8f8f8;
+}
+div.jsvBarActive {
+    background: #f0f0f0;
+}
+div.jsvHandle {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 7px;
+    height: 20px;
+    background: #dddddd;
+}
+div.jsvHandleOver {
+    background: #cccccc;
+}
+div.jsvHandleActive {
+    background: #808080;
+}
+
+div.data-content {
+    position: absolute;
+    width:300px;
+    background-color: #f8f8e0;
+    
+}
+div.jsvSquare {
+    background: white;
+}
+</style>
+
+<style id="jsvStyles" type="text/css">
+div.jsvArrowUp{ width: 10px; height: 10px; background-image: url('upArrow.png'); }
+div.jsvArrowUpOver{ background-position: -10px 0px; }
+div.jsvArrowUpActive{ background-position: -20px 0px; }
+div.jsvArrowDown{ width: 10px; height: 10px; background-image: url('downArrow.png'); }
+div.jsvArrowDownOver{ background-position: -10px 0px; }
+div.jsvArrowDownActive{ background-position: -20px 0px; }
+div.jsvArrowLeft{ width: 10px; height: 10px; background-image: url('leftArrow.png'); }
+div.jsvArrowLeftOver{ background-position: -10px 0px; }
+div.jsvArrowLeftActive{ background-position: -20px 0px; }
+div.jsvArrowRight{ width: 10px; height: 10px; background-image: url('rightArrow.png'); }
+div.jsvArrowRightOver{ background-position: -10px 0px; }
+div.jsvArrowRightActive{ background-position: -20px 0px; }
+</style>
+
+
+
+<body>
+
+    <div id="data-table-outer"></div>
+
+    <div id="vertical-scroll-div">
+        Vertical:
+        <select id="vertical-scroll">
+            <option value="none">None</option>
+            <option value="auto">Auto</option>
+            <option value="visible" selected>Visible</option>
+        </select>
+    </div>
+    <div id="horizontal-scroll-div">
+        Horizontal:
+        <select id="horizontal-scroll">
+            <option value="none">None</option>
+            <option value="auto">Auto</option>
+            <option value="visible">Visible</option>
+        </select>
+    </div>
+    <div id="width-div">
+        Width:
+        <select id="width-value">
+            <option value="10">10</option>
+            <option value="20">20</option>
+        </select>
+    </div>
+    <div id="width-div">
+        Arrows:
+        <input type="checkbox" id="arrows-check" />
+    </div>
+    <div id="width-div">
+        Mouse Wheel:
+        <input type="checkbox" id="mousewheel-check" />
+    </div>
+    
+    
+    <button id="regenButton">Regen</button>
+    <br />
+    <button id="addRowButton">Add Row</button>
+
+</body>
+</html>
